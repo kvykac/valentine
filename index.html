@@ -60,7 +60,6 @@ button{
     min-height:80px;
 }
 
-/* Ring */
 .ring{
     font-size:70px;
     margin-top:20px;
@@ -72,7 +71,6 @@ button{
     to{transform:scale(1.2);}
 }
 
-/* Hearts */
 .heart{
     position:absolute;
     animation:float 5s linear infinite;
@@ -95,7 +93,6 @@ button{
     <button class="no" onclick="moveButton(this)">No 😢</button>
 </div>
 
-<!-- Celebration -->
 <div class="celebration" id="celebration">
     <h1>She said YES!!! ❤️</h1>
 
@@ -103,7 +100,6 @@ button{
 
     <div class="secret" id="secretText"></div>
 
-    <!-- Hidden Music -->
     <iframe id="musicPlayer"
         width="0"
         height="0"
@@ -115,20 +111,17 @@ button{
 
 <script>
 
-// YES clicked
 function yesClicked(){
     document.getElementById("celebration").style.display="flex";
 
     startTyping();
 
-    // Play Sweater Weather
     document.getElementById("musicPlayer").src =
     "https://www.youtube.com/embed/GCdwKhTtNNw?autoplay=1&loop=1&playlist=GCdwKhTtNNw";
 
     for(let i=0;i<50;i++) createHeart();
 }
 
-// Typing love message
 function startTyping(){
     const text =
     "Varvara... You make my world brighter every single day. " +
@@ -136,26 +129,23 @@ function startTyping(){
     "I promise to always try to make you happy. ❤️";
 
     let i=0;
-    const speed=40;
 
     function type(){
         if(i < text.length){
             document.getElementById("secretText").innerHTML += text.charAt(i);
             i++;
-            setTimeout(type,speed);
-        }
+            setTimeout(type,40);
+                    }
     }
     type();
 }
 
-// NO runs away
 function moveButton(btn){
     btn.style.position="absolute";
     btn.style.top=Math.random()*window.innerHeight+"px";
     btn.style.left=Math.random()*window.innerWidth+"px";
 }
 
-// Floating hearts
 setInterval(createHeart,400);
 
 function createHeart(){

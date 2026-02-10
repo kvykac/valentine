@@ -6,60 +6,172 @@
 <title>Viktor ❤️ Varvara</title>
 
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        overflow: hidden;
-    }
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#ff758f,#ff7eb3);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    color:white;
+}
 
-    .container {
-        background: white;
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        max-width: 420px;
-        animation: fadeIn 1.5s ease;
-    }
+.container{
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+    padding:40px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 10px 40px rgba(0,0,0,0.3);
+}
 
-    h1 {
-        color: #ff4d6d;
-        margin-bottom: 5px;
-    }
+button{
+    padding:12px 28px;
+    margin:10px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
 
-    h2 {
-        margin-top: 0;
-        color: #ff758f;
-    }
+.yes{background:#ff3d6e;color:white;}
+.yes:hover{transform:scale(1.1);}
+.no{background:#ffffffaa;}
 
-    p {
-        font-size: 18px;
-    }
+.celebration{
+    position:fixed;
+    inset:0;
+    background:linear-gradient(135deg,#ff3d6e,#ff9eb5);
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    z-index:999;
+}
 
-    #countdown {
-        font-size: 20px;
-        font-weight: bold;
-        color: #ff4d6d;
-        margin: 15px 0;
-    }
+.secret{
+    max-width:400px;
+    margin-top:20px;
+    font-size:20px;
+    min-height:80px;
+}
 
-    button {
-        padding: 12px 25px;
-        margin: 10px;
-        border: none;
-        border-radius: 25px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
+/* Ring */
+.ring{
+    font-size:70px;
+    margin-top:20px;
+    animation:pop 1s ease infinite alternate;
+}
 
-    .yes {
-        background-color: #ff4d6d;
+@keyframes pop{
+    from{transform:scale(1);}
+    to{transform:scale(1.2);}
+}
+
+/* Hearts */
+.heart{
+    position:absolute;
+    animation:float 5s linear infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(100vh);opacity:1;}
+    100%{transform:translateY(-10vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Viktor ❤️ Varvara</h1>
+    <h2>Will you be my Valentine?</h2>
+
+    <button class="yes" onclick="yesClicked()">Yes 💖</button>
+    <button class="no" onclick="moveButton(this)">No 😢</button>
+</div>
+
+<!-- Celebration -->
+<div class="celebration" id="celebration">
+    <h1>She said YES!!! ❤️</h1>
+
+    <div class="ring">💍</div>
+
+    <div class="secret" id="secretText"></div>
+
+    <!-- Hidden Music -->
+    <iframe id="musicPlayer"
+        width="0"
+        height="0"
+        src=""
+        frameborder="0"
+        allow="autoplay">
+    </iframe>
+</div>
+
+<script>
+
+// YES clicked
+function yesClicked(){
+    document.getElementById("celebration").style.display="flex";
+
+    startTyping();
+
+    // Play Sweater Weather
+    document.getElementById("musicPlayer").src =
+    "https://www.youtube.com/embed/GCdwKhTtNNw?autoplay=1&loop=1&playlist=GCdwKhTtNNw";
+
+    for(let i=0;i<50;i++) createHeart();
+}
+
+// Typing love message
+function startTyping(){
+    const text =
+    "Varvara... You make my world brighter every single day. " +
+    "I love your smile, your laugh, and everything about you. " +
+    "I promise to always try to make you happy. ❤️";
+
+    let i=0;
+    const speed=40;
+
+    function type(){
+        if(i < text.length){
+            document.getElementById("secretText").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type,speed);
+        }
+    }
+    type();
+}
+
+// NO runs away
+function moveButton(btn){
+    btn.style.position="absolute";
+    btn.style.top=Math.random()*window.innerHeight+"px";
+    btn.style.left=Math.random()*window.innerWidth+"px";
+}
+
+// Floating hearts
+setInterval(createHeart,400);
+
+function createHeart(){
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+15)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+}
+
+</script>
+
+</body>
+</html>        background-color: #ff4d6d;
         color: white;
     }
 
